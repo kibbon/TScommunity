@@ -1,0 +1,13 @@
+.custome-font{
+	font-family:"Lucida Grande","Hiragino Sans GB","Arial","Microsoft YaHei","STXihei";
+}
+.custome-a{
+	color:#808080;
+	border-width: 0px 0px 0px 0px;
+	border:0;
+	outline:none;
+}
+.custome-a:hover
+{
+	color:#404040;
+}

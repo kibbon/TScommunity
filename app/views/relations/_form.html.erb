@@ -1,0 +1,25 @@
+<%= form_for(@relation) do |f| %>
+  <% if @relation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@relation.errors.count, "error") %> prohibited this relation from being saved:</h2>
+
+      <ul>
+      <% @relation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :projecction %><br>
+    <div><%= f.collection_select(:projection_id, Projection.all, :id, :title) %></div>
+  </div>
+  <div class="field">
+    <%= f.label :person %><br>
+    <div><%= f.collection_select(:person_id, Person.all, :id, :name) %></div>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,51 @@
+<p id="notice" style="display:none;"><%= notice %></p>
+
+<h1>Projection detail</h1>
+<hr/>
+<div class="jumbotron">
+	<h2>
+	  <span class="label label-primary">Title</span>
+	  <span class="custome-font"><%= @projection.title %></span>
+	</h2>
+	<hr/>
+	<p>
+	  <span class="label label-info">Info</span>
+	  <span class="custome-font"><%= @projection.info %></span>
+	</p>
+	<hr/>
+	<p>
+	  <span class="label label-success">Stars</span>
+	  <%= @projection.user_num %>
+	  <span>in total</span>
+	</p>
+	<hr/>
+	<% if can? :manage, :projection %>
+		<%= link_to 'Edit', edit_projection_path(@projection), class: "btn btn-success", style: "float:right;color:white;" %>
+	<% end %>
+	<% if can? :manage, :relation %>
+		<% if (relations=Relation.where(:projection_id => @projection.id, :person_id => current_person.id)).empty? %>
+			<%= form_for [@projection, Relation.new] do |f| %> 
+				<%= f.submit "Star!", class: "btn btn-success", style: "float:right;color:white;" %>
+			<% end %>
+		<% else %>
+			<%= link_to 'Unstar', projection_relation_path(@projection, Relation.find(relations[0].id)), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning", style: "float:right;color:white;" %>
+		<% end %>
+	<% end %>
+	<%= link_to 'Back', projections_path, class: "btn btn-default", style: "float:left;" %>
+</div>
+<br/>
+<h2>Discussions</h2>
+<hr/>
+<div id="discussions">
+	<%= render :partial => @projection.discussions %>
+</div>
+<% if can? :manage, :discussion %>
+	<%= form_for [@projection, Discussion.new] do |f| %>
+		<div>
+			<%= f.label :content, "New Discussion", class: "input-group-addon" %>
+			<%= f.text_area :content, class: "form-control custome-font", style: "height:100px;" %>
+		</div>
+	  </p>
+	  <p><%= f.submit "+ Add Comment", class: "btn btn-default", style: "color:green;float:right" %></p>
+	<% end %>
+<% end %>

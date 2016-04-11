@@ -1,0 +1,26 @@
+<%= form_for(@projection) do |f| %>
+  <% if @projection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@projection.errors.count, "error") %> prohibited this projection from being saved:</h2>
+
+      <ul>
+      <% @projection.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title, class: "input-group-addon", style: "font-size:25px;font-gravity:bold;"%>
+    <%= f.text_field :title, class: "custome-font form-control", style: "font-size:25px;height:50px;" %>
+  </div>
+  <hr/>
+  <div class="field">
+    <%= f.label :info, class: "input-group-addon", style: "font-size:25px;font-gravity:bold;" %>
+    <%= f.text_area :info, class: "custome-font form-control", style: "font-size:15px;height:150px;" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Update!", class: "btn btn-success", style: "float:right;color:white;" %>
+  </div>
+<% end %>

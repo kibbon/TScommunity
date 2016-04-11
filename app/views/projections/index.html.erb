@@ -1,0 +1,40 @@
+<p id="notice" style="display:none;"><%= notice %></p>
+
+<h1>Listing Projections</h1>
+<hr/>
+<div class="table-responsive">
+	<table class="well table table-condensed table-hover table-striped">
+	  <thead>
+		<tr>
+		  <th>Title</th>
+		  <th>Stars</th>
+		  <th>Disuccsions</th>
+		  <th>Last_Update</th>
+		  <th colspan="2">Operation</th>
+		</tr>
+	  </thead>
+
+	  <tbody>
+		<% @projections.each do |projection| %>
+		  <tr>
+			<td><%= link_to projection.title, projection, class: "btn btn-default custome-font" %></td>
+			<td><%= projection.user_num %></td>
+			<td><%= Discussion.where(:projection_id => projection.id).length %></td>
+			<td><%= projection.updated_at.in_time_zone('Beijing').strftime("%Y/%m/%d %H:%M:%S") %></td>
+			<% if can? :manage, :projection %>
+			  <td><%= link_to 'Edit', edit_projection_path(projection), class: "btn btn-default"%></td>
+			  <td><%= link_to 'Delete', projection, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: "color:white;" %></td>
+			<% else %>
+			  <td><%= link_to 'Details', projection, class: "btn btn-primary", style: "color:white;"%></td>
+			<% end %>
+		  </tr>
+		<% end %>
+	  </tbody>
+	</table>
+</div>
+
+<% if can? :manage, :projection %>
+	<%= link_to '+ Add', new_projection_path, class: "btn btn-default btn-lg", style: "float:right;color:green;" %>
+<% end %>
+
+<hr/>

@@ -1,0 +1,16 @@
+<%= div_for discussion do %>
+  <div class="container well">
+  <p>
+  <strong>
+	  <span class="label label-default"><%= discussion.person.usertype %></span>&nbsp <%= discussion.person.name %>
+	  Posted <%= time_ago_in_words(discussion.created_at) %>
+  </strong><br /><br />
+  <span class="custome-font"><%= discussion.content%></span>
+  <% if discussion.person == current_person %>
+	<% if can? :manage, :discussion %>
+		<%= link_to 'Delete', projection_discussion_path(@projection, discussion), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", style: "color:white;float:right;" %>
+		<%= link_to 'Edit', edit_projection_discussion_path(@projection, discussion), class: "btn btn-default", style: "float:right;margin-right:10px;" %>
+	<% end %>
+  <% end %>
+  </div>
+<% end %>

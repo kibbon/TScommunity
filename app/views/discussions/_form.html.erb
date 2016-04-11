@@ -1,0 +1,21 @@
+<%= form_for [@projection,@discussion] do |f| %>
+  <% if @discussion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@discussion.errors.count, "error") %> prohibited this discussion from being saved:</h2>
+
+      <ul>
+      <% @discussion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content, class: "input-group-addon", style: "font-size:25px;font-gravity:bold;"%>
+    <%= f.text_area :content, class: "custome-font form-control", style: "font-size:15px;height:150px;" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Update!", class: "btn btn-success", style: "float:right;color:white;" %>
+  </div>
+<% end %>

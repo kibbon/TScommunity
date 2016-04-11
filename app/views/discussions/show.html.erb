@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @discussion.content %>
+</p>
+
+<p>
+  <strong>Projection:</strong>
+  <%= @discussion.projection.title if @discussion.projection %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @discussion.person.name if @discussion.person %>
+</p>
+
+<%= link_to 'Edit', edit_discussion_path(@discussion) %> |
+<%= link_to 'Back', discussions_path %>
